@@ -25,5 +25,10 @@ provider "azurerm" {
 resource "null_resource" "example" {
   triggers = {
     value = "A example resource that does nothing!"
-  }
+  } 
+}
+
+resource "azurerm_resource_group" "myRG" {
+  name     = "tf-init-example-rg"
+  location = "westus"
 }

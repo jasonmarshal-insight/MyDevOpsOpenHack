@@ -87,6 +87,7 @@ jobs:
 
     - name: Terraform Validate
       run: terraform validate
+      continue-on-error: false
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
