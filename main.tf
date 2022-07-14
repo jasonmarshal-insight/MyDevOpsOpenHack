@@ -15,10 +15,9 @@ terraform {
 
 }
 
-# provider "azurerm" {
-#   features {}
-#   environment = 
-# }
+provider "azurerm" {
+  features {}
+}
 
 # Your code goes here
 
