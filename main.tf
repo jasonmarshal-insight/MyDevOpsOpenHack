@@ -15,9 +15,10 @@ terraform {
 
 }
 
-provider "azurerm" {
-  features {}
-}
+# provider "azurerm" {
+#   features {}
+#   environment = 
+# }
 
 # Your code goes here
 
@@ -28,7 +29,3 @@ resource "null_resource" "example" {
   } 
 }
 
-resource "azurerm_resource_group" "myRG" {
-  name     = "tf-init-example-rg"
-  location = "westus"
-}
