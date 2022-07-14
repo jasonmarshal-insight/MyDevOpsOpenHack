@@ -120,36 +120,36 @@ jobs:
 
 
 
-  deployPlan:
-    name: "Deploy Plan"
-    runs-on: ubuntu-latest
-    environment: production
+  # deployPlan:
+  #   name: "Deploy Plan"
+  #   runs-on: ubuntu-latest
+  #   environment: production
 
-    defaults:
-      run:
-        shell: bash
-        working-directory: "iac/terraform"
+  #   defaults:
+  #     run:
+  #       shell: bash
+  #       working-directory: "iac/terraform"
         
-    # if TFPLAN_EXITCODE fails, stop...scrape the output?
-    needs: generatePlan
-    if: needs.generatePlan.outputs.TFPLAN_EXITCODE == 2 # 2 means: run, because changes are detected and there is an error...
+  #   # if TFPLAN_EXITCODE fails, stop...scrape the output?
+  #   needs: generatePlan
+  #   if: needs.generatePlan.outputs.TFPLAN_EXITCODE == 2 # 2 means: run, because changes are detected and there is an error...
 
-    steps:  
-      # Checks that all Terraform configuration files adhere to a canonical format
-      - name: Terraform Format
-        run: terraform fmt
+  #   steps:  
+  #     # Checks that all Terraform configuration files adhere to a canonical format
+  #     - name: Terraform Format
+  #       run: terraform fmt
 
-      - name: Terraform Validate
-        run: terraform validate
-        continue-on-error: false
+  #     - name: Terraform Validate
+  #       run: terraform validate
+  #       continue-on-error: false
 
-      # Generates an execution plan for Terraform
-      - name: Terraform Plan
-        run: terraform plan -input=false 
-        continue-on-error: false
+  #     # Generates an execution plan for Terraform
+  #     - name: Terraform Plan
+  #       run: terraform plan -input=false 
+  #       continue-on-error: false
 
-        # On push to "main", build or change infrastructure according to Terraform configuration files
-        # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
-      - name: Terraform Apply
-        #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+  #       # On push to "main", build or change infrastructure according to Terraform configuration files
+  #       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+  #     - name: Terraform Apply
+  #       #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+  #       run: terraform apply -auto-approve -input=false
