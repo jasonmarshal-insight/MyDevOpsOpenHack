@@ -7,12 +7,11 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "tf-init-example-rg"
-    storage_account_name = "tformstoracct"
-    container_name       = "tfstate"
-    key                  = "terraform.tfstate"
+    resource_group_name  = "${ secrets.TFSTATE_RESOURCES_GROUP_NAME }"
+    storage_account_name = "${ secrets.TFSTATE_STORAGE_ACCOUNT_NAME }"
+    container_name       = "${ secrets.TFSTATE_STORAGE_CONTAINER_NAME }"
+    key                  = "${ secrets.TFSTATE_KEY }"
   }
-
 }
 
 provider "azurerm" {
