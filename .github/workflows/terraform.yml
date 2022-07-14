@@ -46,6 +46,8 @@ name: 'Terraform'
 
 on:
   push:
+    paths:
+    - "iac/terraform/**"
     branches:
     - "main"
   pull_request:
@@ -73,6 +75,12 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: "iac/terraform"
+
+    outputs:
+      TFPLAN_EXITCODE: ${{ steps.terraformplan.outputs.exitcode }}
+      RESOURCES_PREFIX: ${{ steps.resources_prefix.outputs.result }}
+
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -95,6 +103,14 @@ jobs:
         -backend-config=resource_group_name="$TFSTATE_RESOURCES_GROUP_NAME" \
         -backend-config=key="$TFSTATE_KEY"
 
+    - name: Get repo name
+      uses: actions/github-script@v5
+      id: resources_prefix
+      with:
+        result-encoding: string
+        script: return context.repo.repo.toLowerCase()
+
+ 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt
