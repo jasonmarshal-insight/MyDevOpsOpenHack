@@ -67,7 +67,6 @@ jobs:
       TFSTATE_STORAGE_CONTAINER_NAME: ${{ secrets.TFSTATE_STORAGE_CONTAINER_NAME }}
       TFSTATE_KEY: ${{secrets.TFSTATE_KEY }}
       LOCATION: ${{ secrets.LOCATION }}
-      
     environment: dev
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest

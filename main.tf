@@ -9,7 +9,7 @@ terraform {
   backend "azurerm" {
     resource_group_name  = "tf-init-example-rg"
     storage_account_name = "tformstoracct"
-    container_name       = "tfstate"
+    container_name       = env.storage_container_name
     key                  = "terraform.tfstate"
   }
 }
