@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     azurerm = {
-      source = "hashicorp/azurerm"
+      source  = "hashicorp/azurerm"
       version = "~>3.0.0"
     }
   }
@@ -26,6 +26,6 @@ terraform {
 resource "null_resource" "example" {
   triggers = {
     value = "A example resource that does nothing!"
-  } 
+  }
 }
 
