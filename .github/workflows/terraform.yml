@@ -123,7 +123,7 @@ jobs:
   deployPlan:
     name: "Deploy Plan"
     runs-on: ubuntu-latest
-    environment: production
+    # environment: production
 
     defaults:
       run:
@@ -131,8 +131,8 @@ jobs:
         # working-directory: "iac/terraform"
         
     # if TFPLAN_EXITCODE fails, stop...scrape the output?
-    # needs: generatePlan
-    # if: needs.generatePlan.outputs.TFPLAN_EXITCODE == 2 # 2 means: run, because changes are detected and there is an error...
+    needs: generatePlan
+    if: needs.generatePlan.outputs.TFPLAN_EXITCODE == 2 # 2 means: run, because changes are detected and there is an error...
 
     steps:  
       # Checks that all Terraform configuration files adhere to a canonical format
