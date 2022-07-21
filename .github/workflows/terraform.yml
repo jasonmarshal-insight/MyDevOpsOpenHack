@@ -70,7 +70,7 @@ jobs:
   generatePlan:
     name: 'Generate Plan'
     runs-on: ubuntu-latest
-    environment: dev
+    # environment: dev
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -164,9 +164,9 @@ jobs:
       - name: Terraform Format
         run: terraform fmt
 
-      # - name: Terraform Validate
-      #   run: terraform validate
-      #   continue-on-error: false
+      - name: Terraform Validate
+        run: terraform validate
+        continue-on-error: false
 
       # Generates an execution plan for Terraform
       - name: Terraform Plan
@@ -179,3 +179,5 @@ jobs:
         #Uncomment below to set conditions:  push'es only to main
 #        if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
+
+
